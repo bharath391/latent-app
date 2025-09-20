@@ -7,7 +7,6 @@ import sendMessage from "../../utils/twilio.js";
 
 const router:Router = Router();
 
-//this is it , this is the end 
 router.post("/signup",async (req,res)=>{
     try{
         const number = req.body.phoneNumber;
@@ -27,42 +26,35 @@ router.post("/signup",async (req,res)=>{
             }
         })
         //send this otp to phone number :todo only in production mode
-
-        var otp  = authenticator.generateToken(number + process.env.HASH_ADDED);
-        console.log('generated otp------------>',otp);
         const production = process.env.NODE_ENV === 'production';
-        if (1 == 1){
-            //only in production send otp
-            try{
-                var otp  = authenticator.generateToken(number + process.env.HASH_ADDED);
-                await sendMessage(`Your otp for login is ${otp}`,number);
-                res.status(200).json({msg:"msg sent success"});
-                return;
-            }catch(e){
-                res.status(500).json({msg:"Internal server error",error:e});
-                console.log(e);
-                return;
-            }
-            
-        }
-        res.status(200).json({id:user.id});
-
+        const otp = (production) ? authenticator.generateToken(number + process.env.HASH_ADDED) : "000000";
+        console.log('generated otp------------>',otp); 
+        await sendMessage(`your otp for login is ${otp}`,number);
+        res.status(200).json({msg:"msg sent success"}); 
+        return;
     }catch(err){
-        console.log("Error found in use singup controller",err);
+        console.log("Error found in use signup controller",err);
         res.status(500).json({msg:"Internal Server Erro"});
     } 
-    //authenticator.verifyToken(formattedKey, formattedToken);
-    // { delta: 0 }
 });
 
 router.post("/signup/verify",async (req,res)=>{
     try{
-        const {otp,number,name} = req.body;
+        const {otp,phoneNumber,name} = req.body;
         //otp and number , name all are strings
-        if(!authenticator.verifyToken(number+process.env.HASH_ADDED, otp)){
+        const user = await client.user.findFirst({
+            where:{
+                number:phoneNumber
+            }
+        })
+        if(!user){
+            res.status(404).json({msg:"User not found"});
+            return;
+        }
+        if(authenticator.verifyToken(phoneNumber+process.env.HASH_ADDED, otp)){
             const user = await client.user.update({ //this returns the user id 
                 where:{
-                    number:number
+                    number:phoneNumber
                 },
                 data:{
                     name:name,
@@ -71,8 +63,15 @@ router.post("/signup/verify",async (req,res)=>{
             })
             //set users jwt token :todo
             const token =jwt.sign(user,process.env.JWT_SECRET!);
+            res.cookie('access_token', token, {
+                httpOnly: true, // Prevents client-side script access
+                secure: process.env.NODE_ENV === 'production', // Use secure in production (HTTPS)
+                maxAge: 3600000*7*24, // Cookie expires in 7 days(in milliseconds)
+                //same site ? ::check
+                path: '/' // Cookie is valid for all paths
+            });
             res.status(200).json({
-                token:token,
+                msg:"login successful",
                 userId:user
             });
             return;
@@ -82,7 +81,7 @@ router.post("/signup/verify",async (req,res)=>{
         }
             
     }catch(err){
-        console.log("Error in signup verificatin controller",err);
+        console.log("Error in signup verification controller",err);
         res.status(500).json({msg:"Internal Server Error"});
         return;
     }

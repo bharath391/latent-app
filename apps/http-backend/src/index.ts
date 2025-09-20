@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import express from "express";
+import express,{Request,Response,NextFunction} from "express";
 import v1Router from "./routes/v1/index.js";
 
 const app = express();
@@ -24,6 +24,10 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
 });
 app.use("/api/v1",v1Router);
 
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error("Error ------- >", err);
+    res.status(500).json({ msg: "Internal server error" });
+});
 
 app.listen(process.env.PORT ||8080 ,() =>{
     console.log('Server listening on port 8080');
