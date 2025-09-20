@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id       String  @id @default(uuid())
+  number   String  @unique
+  name     String? @default("Anonymous")
+  verified Boolean @default(false)
+  bookings Booking[]
+}
+
+model Admin {
+  id       String  @id @default(uuid())
+  number   String  @unique
+  name     String
+  verified Boolean @default(false)
+	events Event[]
+}
+
+
+model Event{
+	id 					String 	@id @default(uuid())
+	name 				String
+	adminId 		String
+	admin 			Admin 	@relation(fields: [adminId],references: [id])
+	description String
+	banner 			String
+	bookings Booking[]
+}
+
+model Booking{
+	id 				 String @id @default(uuid())
+	eventId 	 String
+	event 		 Event @relation(fields:[eventId],references:[id])
+	userId 		 String	
+	user 			 User @relation(fields:[userId],references:[id])
+	seats			 Seat[]
+	paymentId String @unique
+	payment		 Payment?
+}
+
+model Seat{
+	id 				 String @id @default(uuid())
+	seatTypeId String
+	seatType 	 SeatType @relation(fields: [seatTypeId], references: [id])
+	bookingId  String
+	booking 	 Booking @relation(fields:[bookingId],references:[id])
+	qr 				 String
+}
+
+model SeatType{
+	id 					String @id @default(uuid())
+	name 				String
+	description String 
+	event 			String
+	price 			Int
+	seats 		  Seat[]
+}
+
+
+model Payment{
+	id 			String @id @default(uuid())
+	eventId String
+	userId  String
+	//do user has a payment status ? 
+	status 	PaymentState
+	bookingId  String @unique
+	booking 	 Booking @relation(fields:[bookingId],references:[id])
+}
+
+enum PaymentState{
+	Success
+	Fail
+	Pending
+}
+
