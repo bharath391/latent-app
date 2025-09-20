@@ -1,8 +1,8 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
 import v1Router from "./routes/v1/index.js";
 
-dotenv.config();
 const app = express();
 
 app.use(express.json());

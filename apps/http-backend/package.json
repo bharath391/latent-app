@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
     "build": "tsc",
-    "dev": "tsc && node dist/index.js"
+    "dev": "nodemon",
+    "start": "NODE_ENV=production node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "authenticator": "^1.1.5",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10",
     "twilio": "^5.10.0"
   },
   "devDependencies": {

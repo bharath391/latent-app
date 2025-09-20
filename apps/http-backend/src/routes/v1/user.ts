@@ -2,6 +2,7 @@ import {Router} from "express";
 import authenticator from "authenticator";
 import {client} from "@repo/db/client";
 import jwt from "jsonwebtoken";
+import sendMessage from "../../utils/twilio.js";
 
 
 const router:Router = Router();
@@ -29,9 +30,20 @@ router.post("/signup",async (req,res)=>{
 
         var otp  = authenticator.generateToken(number + process.env.HASH_ADDED);
         console.log('generated otp------------>',otp);
-        if (process.env.NODE_ENV === 'production'){
+        const production = process.env.NODE_ENV === 'production';
+        if (1 == 1){
             //only in production send otp
-            var otp  = authenticator.generateToken(number + process.env.HASH_ADDED);
+            try{
+                var otp  = authenticator.generateToken(number + process.env.HASH_ADDED);
+                await sendMessage(`Your otp for login is ${otp}`,number);
+                res.status(200).json({msg:"msg sent success"});
+                return;
+            }catch(e){
+                res.status(500).json({msg:"Internal server error",error:e});
+                console.log(e);
+                return;
+            }
+            
         }
         res.status(200).json({id:user.id});
 
