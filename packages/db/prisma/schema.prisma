@@ -29,7 +29,7 @@ model Admin {
   number   String  @unique
   name     String
   verified Boolean @default(false)
-	events Event[]
+  events Event[]
 }
 
 

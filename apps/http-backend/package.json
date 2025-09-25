@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "authenticator": "^1.1.5",
+    "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.10",
@@ -24,6 +25,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/authenticator": "^1.1.4",
+    "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.15.3",

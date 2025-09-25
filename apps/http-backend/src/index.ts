@@ -1,10 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express,{Request,Response,NextFunction} from "express";
-import v1Router from "./routes/v1/index.js";
+import v1Router from "./routes/v1/v1.route.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
