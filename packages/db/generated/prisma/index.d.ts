@@ -1456,10 +1456,12 @@ export namespace Prisma {
 
   export type AdminCountOutputType = {
     events: number
+    updatedEvents: number
   }
 
   export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     events?: boolean | AdminCountOutputTypeCountEventsArgs
+    updatedEvents?: boolean | AdminCountOutputTypeCountUpdatedEventsArgs
   }
 
   // Custom InputTypes
@@ -1477,6 +1479,13 @@ export namespace Prisma {
    * AdminCountOutputType without action
    */
   export type AdminCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountUpdatedEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EventWhereInput
   }
 
@@ -2792,6 +2801,7 @@ export namespace Prisma {
     name?: boolean
     verified?: boolean
     events?: boolean | Admin$eventsArgs<ExtArgs>
+    updatedEvents?: boolean | Admin$updatedEventsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["admin"]>
 
@@ -2819,6 +2829,7 @@ export namespace Prisma {
   export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "name" | "verified", ExtArgs["result"]["admin"]>
   export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     events?: boolean | Admin$eventsArgs<ExtArgs>
+    updatedEvents?: boolean | Admin$updatedEventsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2828,6 +2839,7 @@ export namespace Prisma {
     name: "Admin"
     objects: {
       events: Prisma.$EventPayload<ExtArgs>[]
+      updatedEvents: Prisma.$EventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3229,6 +3241,7 @@ export namespace Prisma {
   export interface Prisma__AdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     events<T extends Admin$eventsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    updatedEvents<T extends Admin$updatedEventsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$updatedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3674,6 +3687,30 @@ export namespace Prisma {
   }
 
   /**
+   * Admin.updatedEvents
+   */
+  export type Admin$updatedEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
    * Admin without action
    */
   export type AdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3708,6 +3745,7 @@ export namespace Prisma {
     adminId: string | null
     description: string | null
     banner: string | null
+    lastUpdateBy: string | null
   }
 
   export type EventMaxAggregateOutputType = {
@@ -3716,6 +3754,7 @@ export namespace Prisma {
     adminId: string | null
     description: string | null
     banner: string | null
+    lastUpdateBy: string | null
   }
 
   export type EventCountAggregateOutputType = {
@@ -3724,6 +3763,7 @@ export namespace Prisma {
     adminId: number
     description: number
     banner: number
+    lastUpdateBy: number
     _all: number
   }
 
@@ -3734,6 +3774,7 @@ export namespace Prisma {
     adminId?: true
     description?: true
     banner?: true
+    lastUpdateBy?: true
   }
 
   export type EventMaxAggregateInputType = {
@@ -3742,6 +3783,7 @@ export namespace Prisma {
     adminId?: true
     description?: true
     banner?: true
+    lastUpdateBy?: true
   }
 
   export type EventCountAggregateInputType = {
@@ -3750,6 +3792,7 @@ export namespace Prisma {
     adminId?: true
     description?: true
     banner?: true
+    lastUpdateBy?: true
     _all?: true
   }
 
@@ -3831,6 +3874,7 @@ export namespace Prisma {
     adminId: string
     description: string
     banner: string
+    lastUpdateBy: string
     _count: EventCountAggregateOutputType | null
     _min: EventMinAggregateOutputType | null
     _max: EventMaxAggregateOutputType | null
@@ -3856,8 +3900,10 @@ export namespace Prisma {
     adminId?: boolean
     description?: boolean
     banner?: boolean
+    lastUpdateBy?: boolean
     admin?: boolean | AdminDefaultArgs<ExtArgs>
     bookings?: boolean | Event$bookingsArgs<ExtArgs>
+    updatedBy?: boolean | AdminDefaultArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
@@ -3867,7 +3913,9 @@ export namespace Prisma {
     adminId?: boolean
     description?: boolean
     banner?: boolean
+    lastUpdateBy?: boolean
     admin?: boolean | AdminDefaultArgs<ExtArgs>
+    updatedBy?: boolean | AdminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3876,7 +3924,9 @@ export namespace Prisma {
     adminId?: boolean
     description?: boolean
     banner?: boolean
+    lastUpdateBy?: boolean
     admin?: boolean | AdminDefaultArgs<ExtArgs>
+    updatedBy?: boolean | AdminDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectScalar = {
@@ -3885,19 +3935,23 @@ export namespace Prisma {
     adminId?: boolean
     description?: boolean
     banner?: boolean
+    lastUpdateBy?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "adminId" | "description" | "banner", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "adminId" | "description" | "banner" | "lastUpdateBy", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | AdminDefaultArgs<ExtArgs>
     bookings?: boolean | Event$bookingsArgs<ExtArgs>
+    updatedBy?: boolean | AdminDefaultArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | AdminDefaultArgs<ExtArgs>
+    updatedBy?: boolean | AdminDefaultArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | AdminDefaultArgs<ExtArgs>
+    updatedBy?: boolean | AdminDefaultArgs<ExtArgs>
   }
 
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3905,6 +3959,7 @@ export namespace Prisma {
     objects: {
       admin: Prisma.$AdminPayload<ExtArgs>
       bookings: Prisma.$BookingPayload<ExtArgs>[]
+      updatedBy: Prisma.$AdminPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3912,6 +3967,7 @@ export namespace Prisma {
       adminId: string
       description: string
       banner: string
+      lastUpdateBy: string
     }, ExtArgs["result"]["event"]>
     composites: {}
   }
@@ -4308,6 +4364,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     admin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     bookings<T extends Event$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, Event$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    updatedBy<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4342,6 +4399,7 @@ export namespace Prisma {
     readonly adminId: FieldRef<"Event", 'String'>
     readonly description: FieldRef<"Event", 'String'>
     readonly banner: FieldRef<"Event", 'String'>
+    readonly lastUpdateBy: FieldRef<"Event", 'String'>
   }
     
 
@@ -9140,7 +9198,8 @@ export namespace Prisma {
     name: 'name',
     adminId: 'adminId',
     description: 'description',
-    banner: 'banner'
+    banner: 'banner',
+    lastUpdateBy: 'lastUpdateBy'
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -9342,6 +9401,7 @@ export namespace Prisma {
     name?: StringFilter<"Admin"> | string
     verified?: BoolFilter<"Admin"> | boolean
     events?: EventListRelationFilter
+    updatedEvents?: EventListRelationFilter
   }
 
   export type AdminOrderByWithRelationInput = {
@@ -9350,6 +9410,7 @@ export namespace Prisma {
     name?: SortOrder
     verified?: SortOrder
     events?: EventOrderByRelationAggregateInput
+    updatedEvents?: EventOrderByRelationAggregateInput
   }
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -9361,6 +9422,7 @@ export namespace Prisma {
     name?: StringFilter<"Admin"> | string
     verified?: BoolFilter<"Admin"> | boolean
     events?: EventListRelationFilter
+    updatedEvents?: EventListRelationFilter
   }, "id" | "number">
 
   export type AdminOrderByWithAggregationInput = {
@@ -9392,8 +9454,10 @@ export namespace Prisma {
     adminId?: StringFilter<"Event"> | string
     description?: StringFilter<"Event"> | string
     banner?: StringFilter<"Event"> | string
+    lastUpdateBy?: StringFilter<"Event"> | string
     admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     bookings?: BookingListRelationFilter
+    updatedBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
   }
 
   export type EventOrderByWithRelationInput = {
@@ -9402,8 +9466,10 @@ export namespace Prisma {
     adminId?: SortOrder
     description?: SortOrder
     banner?: SortOrder
+    lastUpdateBy?: SortOrder
     admin?: AdminOrderByWithRelationInput
     bookings?: BookingOrderByRelationAggregateInput
+    updatedBy?: AdminOrderByWithRelationInput
   }
 
   export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -9415,8 +9481,10 @@ export namespace Prisma {
     adminId?: StringFilter<"Event"> | string
     description?: StringFilter<"Event"> | string
     banner?: StringFilter<"Event"> | string
+    lastUpdateBy?: StringFilter<"Event"> | string
     admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
     bookings?: BookingListRelationFilter
+    updatedBy?: XOR<AdminScalarRelationFilter, AdminWhereInput>
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -9425,6 +9493,7 @@ export namespace Prisma {
     adminId?: SortOrder
     description?: SortOrder
     banner?: SortOrder
+    lastUpdateBy?: SortOrder
     _count?: EventCountOrderByAggregateInput
     _max?: EventMaxOrderByAggregateInput
     _min?: EventMinOrderByAggregateInput
@@ -9439,6 +9508,7 @@ export namespace Prisma {
     adminId?: StringWithAggregatesFilter<"Event"> | string
     description?: StringWithAggregatesFilter<"Event"> | string
     banner?: StringWithAggregatesFilter<"Event"> | string
+    lastUpdateBy?: StringWithAggregatesFilter<"Event"> | string
   }
 
   export type BookingWhereInput = {
@@ -9724,6 +9794,7 @@ export namespace Prisma {
     name: string
     verified?: boolean
     events?: EventCreateNestedManyWithoutAdminInput
+    updatedEvents?: EventCreateNestedManyWithoutUpdatedByInput
   }
 
   export type AdminUncheckedCreateInput = {
@@ -9732,6 +9803,7 @@ export namespace Prisma {
     name: string
     verified?: boolean
     events?: EventUncheckedCreateNestedManyWithoutAdminInput
+    updatedEvents?: EventUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type AdminUpdateInput = {
@@ -9740,6 +9812,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
     events?: EventUpdateManyWithoutAdminNestedInput
+    updatedEvents?: EventUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type AdminUncheckedUpdateInput = {
@@ -9748,6 +9821,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
     events?: EventUncheckedUpdateManyWithoutAdminNestedInput
+    updatedEvents?: EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type AdminCreateManyInput = {
@@ -9778,6 +9852,7 @@ export namespace Prisma {
     banner: string
     admin: AdminCreateNestedOneWithoutEventsInput
     bookings?: BookingCreateNestedManyWithoutEventInput
+    updatedBy: AdminCreateNestedOneWithoutUpdatedEventsInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -9786,6 +9861,7 @@ export namespace Prisma {
     adminId: string
     description: string
     banner: string
+    lastUpdateBy: string
     bookings?: BookingUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -9796,6 +9872,7 @@ export namespace Prisma {
     banner?: StringFieldUpdateOperationsInput | string
     admin?: AdminUpdateOneRequiredWithoutEventsNestedInput
     bookings?: BookingUpdateManyWithoutEventNestedInput
+    updatedBy?: AdminUpdateOneRequiredWithoutUpdatedEventsNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -9804,6 +9881,7 @@ export namespace Prisma {
     adminId?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
+    lastUpdateBy?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -9813,6 +9891,7 @@ export namespace Prisma {
     adminId: string
     description: string
     banner: string
+    lastUpdateBy: string
   }
 
   export type EventUpdateManyMutationInput = {
@@ -9828,6 +9907,7 @@ export namespace Prisma {
     adminId?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
+    lastUpdateBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type BookingCreateInput = {
@@ -10204,6 +10284,7 @@ export namespace Prisma {
     adminId?: SortOrder
     description?: SortOrder
     banner?: SortOrder
+    lastUpdateBy?: SortOrder
   }
 
   export type EventMaxOrderByAggregateInput = {
@@ -10212,6 +10293,7 @@ export namespace Prisma {
     adminId?: SortOrder
     description?: SortOrder
     banner?: SortOrder
+    lastUpdateBy?: SortOrder
   }
 
   export type EventMinOrderByAggregateInput = {
@@ -10220,6 +10302,7 @@ export namespace Prisma {
     adminId?: SortOrder
     description?: SortOrder
     banner?: SortOrder
+    lastUpdateBy?: SortOrder
   }
 
   export type EventScalarRelationFilter = {
@@ -10460,10 +10543,24 @@ export namespace Prisma {
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
+  export type EventCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<EventCreateWithoutUpdatedByInput, EventUncheckedCreateWithoutUpdatedByInput> | EventCreateWithoutUpdatedByInput[] | EventUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutUpdatedByInput | EventCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: EventCreateManyUpdatedByInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
   export type EventUncheckedCreateNestedManyWithoutAdminInput = {
     create?: XOR<EventCreateWithoutAdminInput, EventUncheckedCreateWithoutAdminInput> | EventCreateWithoutAdminInput[] | EventUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: EventCreateOrConnectWithoutAdminInput | EventCreateOrConnectWithoutAdminInput[]
     createMany?: EventCreateManyAdminInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<EventCreateWithoutUpdatedByInput, EventUncheckedCreateWithoutUpdatedByInput> | EventCreateWithoutUpdatedByInput[] | EventUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutUpdatedByInput | EventCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: EventCreateManyUpdatedByInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
@@ -10481,6 +10578,20 @@ export namespace Prisma {
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
+  export type EventUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<EventCreateWithoutUpdatedByInput, EventUncheckedCreateWithoutUpdatedByInput> | EventCreateWithoutUpdatedByInput[] | EventUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutUpdatedByInput | EventCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutUpdatedByInput | EventUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: EventCreateManyUpdatedByInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutUpdatedByInput | EventUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutUpdatedByInput | EventUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
   export type EventUncheckedUpdateManyWithoutAdminNestedInput = {
     create?: XOR<EventCreateWithoutAdminInput, EventUncheckedCreateWithoutAdminInput> | EventCreateWithoutAdminInput[] | EventUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: EventCreateOrConnectWithoutAdminInput | EventCreateOrConnectWithoutAdminInput[]
@@ -10495,6 +10606,20 @@ export namespace Prisma {
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
+  export type EventUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<EventCreateWithoutUpdatedByInput, EventUncheckedCreateWithoutUpdatedByInput> | EventCreateWithoutUpdatedByInput[] | EventUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutUpdatedByInput | EventCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutUpdatedByInput | EventUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: EventCreateManyUpdatedByInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutUpdatedByInput | EventUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutUpdatedByInput | EventUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
   export type AdminCreateNestedOneWithoutEventsInput = {
     create?: XOR<AdminCreateWithoutEventsInput, AdminUncheckedCreateWithoutEventsInput>
     connectOrCreate?: AdminCreateOrConnectWithoutEventsInput
@@ -10506,6 +10631,12 @@ export namespace Prisma {
     connectOrCreate?: BookingCreateOrConnectWithoutEventInput | BookingCreateOrConnectWithoutEventInput[]
     createMany?: BookingCreateManyEventInputEnvelope
     connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutUpdatedEventsInput = {
+    create?: XOR<AdminCreateWithoutUpdatedEventsInput, AdminUncheckedCreateWithoutUpdatedEventsInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutUpdatedEventsInput
+    connect?: AdminWhereUniqueInput
   }
 
   export type BookingUncheckedCreateNestedManyWithoutEventInput = {
@@ -10535,6 +10666,14 @@ export namespace Prisma {
     update?: BookingUpdateWithWhereUniqueWithoutEventInput | BookingUpdateWithWhereUniqueWithoutEventInput[]
     updateMany?: BookingUpdateManyWithWhereWithoutEventInput | BookingUpdateManyWithWhereWithoutEventInput[]
     deleteMany?: BookingScalarWhereInput | BookingScalarWhereInput[]
+  }
+
+  export type AdminUpdateOneRequiredWithoutUpdatedEventsNestedInput = {
+    create?: XOR<AdminCreateWithoutUpdatedEventsInput, AdminUncheckedCreateWithoutUpdatedEventsInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutUpdatedEventsInput
+    upsert?: AdminUpsertWithoutUpdatedEventsInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutUpdatedEventsInput, AdminUpdateWithoutUpdatedEventsInput>, AdminUncheckedUpdateWithoutUpdatedEventsInput>
   }
 
   export type BookingUncheckedUpdateManyWithoutEventNestedInput = {
@@ -10948,6 +11087,7 @@ export namespace Prisma {
     description: string
     banner: string
     bookings?: BookingCreateNestedManyWithoutEventInput
+    updatedBy: AdminCreateNestedOneWithoutUpdatedEventsInput
   }
 
   export type EventUncheckedCreateWithoutAdminInput = {
@@ -10955,6 +11095,7 @@ export namespace Prisma {
     name: string
     description: string
     banner: string
+    lastUpdateBy: string
     bookings?: BookingUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -10965,6 +11106,34 @@ export namespace Prisma {
 
   export type EventCreateManyAdminInputEnvelope = {
     data: EventCreateManyAdminInput | EventCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventCreateWithoutUpdatedByInput = {
+    id?: string
+    name: string
+    description: string
+    banner: string
+    admin: AdminCreateNestedOneWithoutEventsInput
+    bookings?: BookingCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    name: string
+    adminId: string
+    description: string
+    banner: string
+    bookings?: BookingUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutUpdatedByInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutUpdatedByInput, EventUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type EventCreateManyUpdatedByInputEnvelope = {
+    data: EventCreateManyUpdatedByInput | EventCreateManyUpdatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -10993,6 +11162,23 @@ export namespace Prisma {
     adminId?: StringFilter<"Event"> | string
     description?: StringFilter<"Event"> | string
     banner?: StringFilter<"Event"> | string
+    lastUpdateBy?: StringFilter<"Event"> | string
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutUpdatedByInput, EventUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<EventCreateWithoutUpdatedByInput, EventUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutUpdatedByInput, EventUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutUpdatedByInput>
   }
 
   export type AdminCreateWithoutEventsInput = {
@@ -11000,6 +11186,7 @@ export namespace Prisma {
     number: string
     name: string
     verified?: boolean
+    updatedEvents?: EventCreateNestedManyWithoutUpdatedByInput
   }
 
   export type AdminUncheckedCreateWithoutEventsInput = {
@@ -11007,6 +11194,7 @@ export namespace Prisma {
     number: string
     name: string
     verified?: boolean
+    updatedEvents?: EventUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type AdminCreateOrConnectWithoutEventsInput = {
@@ -11040,6 +11228,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AdminCreateWithoutUpdatedEventsInput = {
+    id?: string
+    number: string
+    name: string
+    verified?: boolean
+    events?: EventCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateWithoutUpdatedEventsInput = {
+    id?: string
+    number: string
+    name: string
+    verified?: boolean
+    events?: EventUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminCreateOrConnectWithoutUpdatedEventsInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutUpdatedEventsInput, AdminUncheckedCreateWithoutUpdatedEventsInput>
+  }
+
   export type AdminUpsertWithoutEventsInput = {
     update: XOR<AdminUpdateWithoutEventsInput, AdminUncheckedUpdateWithoutEventsInput>
     create: XOR<AdminCreateWithoutEventsInput, AdminUncheckedCreateWithoutEventsInput>
@@ -11056,6 +11265,7 @@ export namespace Prisma {
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
+    updatedEvents?: EventUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type AdminUncheckedUpdateWithoutEventsInput = {
@@ -11063,6 +11273,7 @@ export namespace Prisma {
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
+    updatedEvents?: EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type BookingUpsertWithWhereUniqueWithoutEventInput = {
@@ -11081,12 +11292,40 @@ export namespace Prisma {
     data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyWithoutEventInput>
   }
 
+  export type AdminUpsertWithoutUpdatedEventsInput = {
+    update: XOR<AdminUpdateWithoutUpdatedEventsInput, AdminUncheckedUpdateWithoutUpdatedEventsInput>
+    create: XOR<AdminCreateWithoutUpdatedEventsInput, AdminUncheckedCreateWithoutUpdatedEventsInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutUpdatedEventsInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutUpdatedEventsInput, AdminUncheckedUpdateWithoutUpdatedEventsInput>
+  }
+
+  export type AdminUpdateWithoutUpdatedEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    events?: EventUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutUpdatedEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    events?: EventUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
   export type EventCreateWithoutBookingsInput = {
     id?: string
     name: string
     description: string
     banner: string
     admin: AdminCreateNestedOneWithoutEventsInput
+    updatedBy: AdminCreateNestedOneWithoutUpdatedEventsInput
   }
 
   export type EventUncheckedCreateWithoutBookingsInput = {
@@ -11095,6 +11334,7 @@ export namespace Prisma {
     adminId: string
     description: string
     banner: string
+    lastUpdateBy: string
   }
 
   export type EventCreateOrConnectWithoutBookingsInput = {
@@ -11179,6 +11419,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
     admin?: AdminUpdateOneRequiredWithoutEventsNestedInput
+    updatedBy?: AdminUpdateOneRequiredWithoutUpdatedEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutBookingsInput = {
@@ -11187,6 +11428,7 @@ export namespace Prisma {
     adminId?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
+    lastUpdateBy?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpsertWithoutBookingsInput = {
@@ -11480,6 +11722,15 @@ export namespace Prisma {
     name: string
     description: string
     banner: string
+    lastUpdateBy: string
+  }
+
+  export type EventCreateManyUpdatedByInput = {
+    id?: string
+    name: string
+    adminId: string
+    description: string
+    banner: string
   }
 
   export type EventUpdateWithoutAdminInput = {
@@ -11488,6 +11739,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUpdateManyWithoutEventNestedInput
+    updatedBy?: AdminUpdateOneRequiredWithoutUpdatedEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutAdminInput = {
@@ -11495,12 +11747,40 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
+    lastUpdateBy?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateManyWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    banner?: StringFieldUpdateOperationsInput | string
+    lastUpdateBy?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    banner?: StringFieldUpdateOperationsInput | string
+    admin?: AdminUpdateOneRequiredWithoutEventsNestedInput
+    bookings?: BookingUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    adminId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    banner?: StringFieldUpdateOperationsInput | string
+    bookings?: BookingUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    adminId?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     banner?: StringFieldUpdateOperationsInput | string
   }

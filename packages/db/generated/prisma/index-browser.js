@@ -139,7 +139,8 @@ exports.Prisma.EventScalarFieldEnum = {
   name: 'name',
   adminId: 'adminId',
   description: 'description',
-  banner: 'banner'
+  banner: 'banner',
+  lastUpdateBy: 'lastUpdateBy'
 };
 
 exports.Prisma.BookingScalarFieldEnum = {

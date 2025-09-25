@@ -23,21 +23,26 @@ model User {
 }
 
 model Admin {
-  id       String  @id @default(uuid())
-  number   String  @unique
-  name     String
-  verified Boolean @default(false)
-  events   Event[]
+  id            String  @id @default(uuid())
+  number        String  @unique
+  name          String
+  verified      Boolean @default(false)
+  events        Event[] @relation("CreatedEvents")
+  updatedEvents Event[] @relation("UpdatedByEvents")
+  //back relation , must when refering to same event , but different field
 }
 
 model Event {
-  id          String    @id @default(uuid())
-  name        String
-  adminId     String
-  admin       Admin     @relation(fields: [adminId], references: [id])
-  description String
-  banner      String
-  bookings    Booking[]
+  id           String    @id @default(uuid())
+  name         String
+  adminId      String
+  admin        Admin     @relation("CreatedEvents", fields: [adminId], references: [id])
+  description  String
+  banner       String
+  bookings     Booking[]
+  lastUpdateBy String
+  updatedBy    Admin     @relation("UpdatedByEvents", fields: [lastUpdateBy], references: [id])
+  //need naming when refering to same table , via multiple fields 
 }
 
 model Booking {
