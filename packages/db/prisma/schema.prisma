@@ -28,7 +28,6 @@ model Admin {
   id       String  @id @default(uuid())
   number   String  @unique
   name     String
-  verified Boolean @default(false)
   events         Event[] @relation("CreatedEvents")
   updatedEvents  Event[] @relation("UpdatedByEvents")
   //back relation , must when refering to same event , but different field
@@ -43,6 +42,7 @@ model Event{
 	description String
 	banner 			String
 	bookings Booking[]
+	//booking count
 	lastUpdateBy  String
 	updatedBy     Admin    @relation("UpdatedByEvents",fields: [lastUpdateBy], references: [id])
 	//need naming when refering to same table , via multiple fields 

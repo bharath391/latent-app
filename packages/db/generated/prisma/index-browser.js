@@ -130,8 +130,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
   number: 'number',
-  name: 'name',
-  verified: 'verified'
+  name: 'name'
 };
 
 exports.Prisma.EventScalarFieldEnum = {

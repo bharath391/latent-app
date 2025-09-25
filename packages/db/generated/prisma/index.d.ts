@@ -2658,21 +2658,18 @@ export namespace Prisma {
     id: string | null
     number: string | null
     name: string | null
-    verified: boolean | null
   }
 
   export type AdminMaxAggregateOutputType = {
     id: string | null
     number: string | null
     name: string | null
-    verified: boolean | null
   }
 
   export type AdminCountAggregateOutputType = {
     id: number
     number: number
     name: number
-    verified: number
     _all: number
   }
 
@@ -2681,21 +2678,18 @@ export namespace Prisma {
     id?: true
     number?: true
     name?: true
-    verified?: true
   }
 
   export type AdminMaxAggregateInputType = {
     id?: true
     number?: true
     name?: true
-    verified?: true
   }
 
   export type AdminCountAggregateInputType = {
     id?: true
     number?: true
     name?: true
-    verified?: true
     _all?: true
   }
 
@@ -2775,7 +2769,6 @@ export namespace Prisma {
     id: string
     number: string
     name: string
-    verified: boolean
     _count: AdminCountAggregateOutputType | null
     _min: AdminMinAggregateOutputType | null
     _max: AdminMaxAggregateOutputType | null
@@ -2799,7 +2792,6 @@ export namespace Prisma {
     id?: boolean
     number?: boolean
     name?: boolean
-    verified?: boolean
     events?: boolean | Admin$eventsArgs<ExtArgs>
     updatedEvents?: boolean | Admin$updatedEventsArgs<ExtArgs>
     _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
@@ -2809,24 +2801,21 @@ export namespace Prisma {
     id?: boolean
     number?: boolean
     name?: boolean
-    verified?: boolean
   }, ExtArgs["result"]["admin"]>
 
   export type AdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     number?: boolean
     name?: boolean
-    verified?: boolean
   }, ExtArgs["result"]["admin"]>
 
   export type AdminSelectScalar = {
     id?: boolean
     number?: boolean
     name?: boolean
-    verified?: boolean
   }
 
-  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "name" | "verified", ExtArgs["result"]["admin"]>
+  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "name", ExtArgs["result"]["admin"]>
   export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     events?: boolean | Admin$eventsArgs<ExtArgs>
     updatedEvents?: boolean | Admin$updatedEventsArgs<ExtArgs>
@@ -2845,7 +2834,6 @@ export namespace Prisma {
       id: string
       number: string
       name: string
-      verified: boolean
     }, ExtArgs["result"]["admin"]>
     composites: {}
   }
@@ -3274,7 +3262,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Admin", 'String'>
     readonly number: FieldRef<"Admin", 'String'>
     readonly name: FieldRef<"Admin", 'String'>
-    readonly verified: FieldRef<"Admin", 'Boolean'>
   }
     
 
@@ -9186,8 +9173,7 @@ export namespace Prisma {
   export const AdminScalarFieldEnum: {
     id: 'id',
     number: 'number',
-    name: 'name',
-    verified: 'verified'
+    name: 'name'
   };
 
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
@@ -9399,7 +9385,6 @@ export namespace Prisma {
     id?: StringFilter<"Admin"> | string
     number?: StringFilter<"Admin"> | string
     name?: StringFilter<"Admin"> | string
-    verified?: BoolFilter<"Admin"> | boolean
     events?: EventListRelationFilter
     updatedEvents?: EventListRelationFilter
   }
@@ -9408,7 +9393,6 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     name?: SortOrder
-    verified?: SortOrder
     events?: EventOrderByRelationAggregateInput
     updatedEvents?: EventOrderByRelationAggregateInput
   }
@@ -9420,7 +9404,6 @@ export namespace Prisma {
     OR?: AdminWhereInput[]
     NOT?: AdminWhereInput | AdminWhereInput[]
     name?: StringFilter<"Admin"> | string
-    verified?: BoolFilter<"Admin"> | boolean
     events?: EventListRelationFilter
     updatedEvents?: EventListRelationFilter
   }, "id" | "number">
@@ -9429,7 +9412,6 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     name?: SortOrder
-    verified?: SortOrder
     _count?: AdminCountOrderByAggregateInput
     _max?: AdminMaxOrderByAggregateInput
     _min?: AdminMinOrderByAggregateInput
@@ -9442,7 +9424,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Admin"> | string
     number?: StringWithAggregatesFilter<"Admin"> | string
     name?: StringWithAggregatesFilter<"Admin"> | string
-    verified?: BoolWithAggregatesFilter<"Admin"> | boolean
   }
 
   export type EventWhereInput = {
@@ -9792,7 +9773,6 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
     events?: EventCreateNestedManyWithoutAdminInput
     updatedEvents?: EventCreateNestedManyWithoutUpdatedByInput
   }
@@ -9801,7 +9781,6 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
     events?: EventUncheckedCreateNestedManyWithoutAdminInput
     updatedEvents?: EventUncheckedCreateNestedManyWithoutUpdatedByInput
   }
@@ -9810,7 +9789,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
     events?: EventUpdateManyWithoutAdminNestedInput
     updatedEvents?: EventUpdateManyWithoutUpdatedByNestedInput
   }
@@ -9819,7 +9797,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
     events?: EventUncheckedUpdateManyWithoutAdminNestedInput
     updatedEvents?: EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
@@ -9828,21 +9805,18 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
   }
 
   export type AdminUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AdminUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EventCreateInput = {
@@ -10256,21 +10230,18 @@ export namespace Prisma {
     id?: SortOrder
     number?: SortOrder
     name?: SortOrder
-    verified?: SortOrder
   }
 
   export type AdminMaxOrderByAggregateInput = {
     id?: SortOrder
     number?: SortOrder
     name?: SortOrder
-    verified?: SortOrder
   }
 
   export type AdminMinOrderByAggregateInput = {
     id?: SortOrder
     number?: SortOrder
     name?: SortOrder
-    verified?: SortOrder
   }
 
   export type AdminScalarRelationFilter = {
@@ -11185,7 +11156,6 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
     updatedEvents?: EventCreateNestedManyWithoutUpdatedByInput
   }
 
@@ -11193,7 +11163,6 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
     updatedEvents?: EventUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
@@ -11232,7 +11201,6 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
     events?: EventCreateNestedManyWithoutAdminInput
   }
 
@@ -11240,7 +11208,6 @@ export namespace Prisma {
     id?: string
     number: string
     name: string
-    verified?: boolean
     events?: EventUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -11264,7 +11231,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
     updatedEvents?: EventUpdateManyWithoutUpdatedByNestedInput
   }
 
@@ -11272,7 +11238,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
     updatedEvents?: EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
@@ -11307,7 +11272,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
     events?: EventUpdateManyWithoutAdminNestedInput
   }
 
@@ -11315,7 +11279,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     number?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    verified?: BoolFieldUpdateOperationsInput | boolean
     events?: EventUncheckedUpdateManyWithoutAdminNestedInput
   }
 
