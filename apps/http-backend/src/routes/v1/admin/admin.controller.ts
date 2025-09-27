@@ -49,16 +49,14 @@ class AdminController{
             const {number,otp} = req.body;
             const key = process.env.HASH_ADDED;
             if(authenticator.verifyToken(number+key!,otp)){
-                const admin = await client.admin.update({
+                const admin = await client.admin.findFirst({
                     where:{
                         number:number
                     },
-                    data:{
-                        verified:true
-                    }
+                    
                 })
                 //assign jwt to admin  TODO:convert this to refresh token later
-                const jwt_token = jwt.sign({adminId:admin.id},process.env.JWT_SECRET!);
+                const jwt_token = jwt.sign({adminId:admin!.id},process.env.JWT_SECRET!);
                 res.cookie('jwt_token', jwt_token, {
                     httpOnly: true, // Prevents client-side script access
                     secure: process.env.NODE_ENV === 'production', // Use secure in production (HTTPS)
@@ -93,8 +91,7 @@ class AdminController{
     };
 
 }
-
-const adminController = new AdminController();
+onst adminController = new AdminController();
 
 
 export default adminController;
